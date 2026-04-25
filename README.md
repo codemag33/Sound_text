@@ -27,13 +27,23 @@ python voice_to_text_advanced.py --continuous
 python voice_to_text_advanced.py --history
 ```
 
-### 3. **voice_to_text_gnu.py** - GNU/Linux версия ⭐
+### 3. **voice_to_text_gnu.py** - GNU/Linux версия
 Оптимизирована для Linux с лучшей интеграцией системы:
 ```bash
 python voice_to_text_gnu.py              # Интерактивный режим
 python voice_to_text_gnu.py --lang en-US  # Другой язык
 python voice_to_text_gnu.py --history     # История
 python voice_to_text_gnu.py --system-info # Информация о системе
+```
+
+### 4. **voice_to_text_windows.py** - Windows версия ⭐
+Полностью оптимизирована для Windows с системными уведомлениями:
+```cmd
+python voice_to_text_windows.py           # Интерактивный режим
+python voice_to_text_windows.py --single  # Однократная запись
+python voice_to_text_windows.py --lang en-US  # Другой язык
+python voice_to_text_windows.py --history     # История
+python voice_to_text_windows.py --system-info # Информация
 ```
 
 ## 🚀 Установка
@@ -43,9 +53,25 @@ python voice_to_text_gnu.py --system-info # Информация о систем
 - Микрофон
 - Интернет-соединение (для Google Speech Recognition API)
 
-### На Ubuntu/Debian:
+### 🪟 На Windows:
+```cmd
+# 1. Установить Python (www.python.org, отметить "Add to PATH")
+# 2. Клонировать или скачать проект
+git clone https://github.com/codemag33/Sound_text.git
+cd Sound_text
+
+# 3. Установить зависимости
+pip install -r requirements.txt
+
+# 4. Запустить
+python voice_to_text_windows.py
+```
+
+👉 **[Подробная инструкция для Windows](INSTALL_WINDOWS.md)**
+
+### 🐧 На Ubuntu/Debian:
 ```bash
-# Установить системные зависимости
+# 1. Установить системные зависимости
 sudo apt-get update
 sudo apt-get install -y python3-pip portaudio19-dev
 
@@ -54,20 +80,25 @@ sudo apt-get install -y xclip      # Для X11
 # или
 sudo apt-get install -y xsel       # Альтернатива
 
-# Установить Python зависимости
+# 2. Установить Python зависимости
 pip install -r requirements.txt
+
+# 3. Запустить GNU версию
+python voice_to_text_gnu.py
 ```
 
-### На Fedora/RHEL:
+### 🔴 На Fedora/RHEL:
 ```bash
 sudo dnf install python3-pip portaudio-devel xclip
 pip install -r requirements.txt
+python voice_to_text_gnu.py
 ```
 
-### На Arch:
+### 🟦 На Arch:
 ```bash
 sudo pacman -S python-pip portaudio xclip
 pip install -r requirements.txt
+python voice_to_text_gnu.py
 ```
 
 ## 💻 Использование
@@ -103,37 +134,66 @@ python voice_to_text_advanced.py --history
 ## 🔧 Технические детали
 
 ### Поддерживаемые буферы обмена:
+
+**Windows:**
+- `pyperclip` - встроенная поддержка, работает со всеми версиями Windows
+
+**Linux:**
 - `xclip` - стандартная утилита X11
 - `xsel` - альтернативная утилита X11
 - `wl-copy` - для Wayland
-- `pbcopy` - для macOS
+
+**macOS:**
+- `pbcopy` - встроенная утилита
 
 Программа автоматически определяет доступный инструмент.
 
-### Расположение данных (GNU версия):
+### Расположение данных:
+
+**Windows:**
+- История: `C:\Users\[YourUsername]\AppData\Roaming\VoiceToText\history.json`
+- Следует Windows стандартам для пользовательских данных
+
+**Linux (GNU версия):**
 - История: `~/.local/share/voice_to_text/history.json`
 - Следует XDG Base Directory Specification
 
 ## 📝 Примеры команд
 
-```bash
+### Windows:
+```cmd
 # Базовая однократная запись
-./voice_to_text.py
+python voice_to_text_windows.py --single
 
-# Непрерывная запись с историей
-./voice_to_text_advanced.py --continuous
+# Интерактивный режим
+python voice_to_text_windows.py
 
-# GNU/Linux с русским языком
-./voice_to_text_gnu.py
+# Другой язык
+python voice_to_text_windows.py --lang en-US
 
-# Просмотр истории записей
-./voice_to_text_gnu.py --history
+# История записей
+python voice_to_text_windows.py --history
 
 # Очистка истории
-./voice_to_text_gnu.py --clear-history
+python voice_to_text_windows.py --clear-history
+```
+
+### Linux/macOS:
+```bash
+# GNU версия (Linux)
+python voice_to_text_gnu.py
+
+# Расширенная версия
+python voice_to_text_advanced.py --continuous
+
+# Просмотр истории
+python voice_to_text_gnu.py --history
 
 # Информация о системе
-./voice_to_text_gnu.py --system-info
+python voice_to_text_gnu.py --system-info
+
+# Выбор языка
+python voice_to_text_gnu.py --lang en-US
 ```
 
 ## 🆘 Решение проблем
@@ -182,4 +242,4 @@ MIT License - смотрите LICENSE файл для подробностей
 
 ---
 
-**Разработано для GNU/Linux систем** 🐧
+**Полная кроссплатформенная поддержка** 🪟 🐧 🍎
