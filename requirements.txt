@@ -1,2 +1,4 @@
 SpeechRecognition==3.10.0
 pyperclip==1.8.2
+PyAudio==0.2.13
+
